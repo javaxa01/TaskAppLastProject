@@ -14,7 +14,7 @@
 		2CC987E12F4519A40069B571 /* Exceptions for "TaskAppLastProject" folder in "TaskAppLastProject" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
-				Info.plist,
+				Info/Info.plist,
 			);
 			target = 2CC987D02F4519A10069B571 /* TaskAppLastProject */;
 		};
