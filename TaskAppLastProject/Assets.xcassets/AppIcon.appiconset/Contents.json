@@ -1,28 +1,7 @@
 {
   "images" : [
     {
-      "idiom" : "universal",
-      "platform" : "ios",
-      "size" : "1024x1024"
-    },
-    {
-      "appearances" : [
-        {
-          "appearance" : "luminosity",
-          "value" : "dark"
-        }
-      ],
-      "idiom" : "universal",
-      "platform" : "ios",
-      "size" : "1024x1024"
-    },
-    {
-      "appearances" : [
-        {
-          "appearance" : "luminosity",
-          "value" : "tinted"
-        }
-      ],
+      "filename" : "craiyon_232506_App_Icon_einer_simplen__aber_sch_nen_kleinen_Digitaluhr__Quadratisches_Icon_mit_stark_abgerundeten_E.png",
       "idiom" : "universal",
       "platform" : "ios",
       "size" : "1024x1024"
