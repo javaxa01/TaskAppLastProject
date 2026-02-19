@@ -8,6 +8,8 @@ struct TaskApp: App {
         }
     }
 }
+
+// --- მოდელი ---
 struct ToDoItem: Identifiable {
     let id = UUID()
     var title: String
@@ -15,11 +17,10 @@ struct ToDoItem: Identifiable {
 }
 
 struct ContentView: View {
-    // საწყისი მონაცემები
     @State private var tasks: [ToDoItem] = [
-        ToDoItem(title: "Add Your Todo Item Here", isCompleted: false),
-        ToDoItem(title: "Add Your Todo Item Here", isCompleted: false),
-        ToDoItem(title: "Add Your Todo Item Here", isCompleted: true)
+        ToDoItem(title: "Explore SwiftUI Features", isCompleted: false),
+        ToDoItem(title: "Design Modern UI", isCompleted: true),
+        ToDoItem(title: "Setup Data Persistence", isCompleted: false)
     ]
     
     var body: some View {
@@ -33,6 +34,12 @@ struct ContentView: View {
 struct MainTaskView: View {
     @Binding var tasks: [ToDoItem]
     
+    private var currentDateString: String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd.MM.yyyy"
+        return formatter.string(from: Date())
+    }
+    
     var body: some View {
         ZStack {
             backgroundGradient
@@ -41,45 +48,29 @@ struct MainTaskView: View {
                 headerSection
                 
                 // ფილტრის ღილაკები
-                HStack {
+                HStack(spacing: 30) {
                     Spacer()
-                    VStack {
-                        Image(systemName: "list.bullet")
-                        Text("All").font(.caption2)
-                    }
-                    .foregroundColor(.white)
+                    filterButton(title: "All", icon: "list.bullet", color: .white, active: true)
                     
-                    Spacer()
-                    
-                    NavigationLink(destination: CompletedTaskView(tasks: tasks)) {
-                        VStack {
-                            Image(systemName: "checkmark")
-                            Text("Completed").font(.caption2)
-                        }
+                    NavigationLink(destination: FilteredTaskView(tasks: $tasks, filterCompleted: true)) {
+                        filterButton(title: "Done", icon: "checkmark.seal.fill", color: .green, active: false)
                     }
-                    .foregroundColor(.gray)
+                    
+                    NavigationLink(destination: FilteredTaskView(tasks: $tasks, filterCompleted: false)) {
+                        filterButton(title: "Pending", icon: "clock.badge.exclamationmark", color: .orange, active: false)
+                    }
                     Spacer()
                 }
                 .padding(.vertical)
 
+                // სტატისტიკის ახალი ვიზუალი (Progress Card)
+                statisticsCard
+                
                 // დავალებების სია
                 ScrollView {
-                    VStack(spacing: 12) {
+                    VStack(spacing: 15) {
                         ForEach($tasks) { $task in
-                            HStack {
-                                Text(task.title)
-                                    .font(.system(size: 14))
-                                    .foregroundColor(.gray)
-                                Spacer()
-                                Image(systemName: "pencil").foregroundColor(.black)
-                                Button(action: { task.isCompleted.toggle() }) {
-                                    Image(systemName: task.isCompleted ? "checkmark.circle.fill" : "checkmark.circle")
-                                        .foregroundColor(.black)
-                                }
-                            }
-                            .padding()
-                            .background(Color.white)
-                            .cornerRadius(12)
+                            taskRow(task: $task)
                         }
                     }
                     .padding(.horizontal)
@@ -89,48 +80,148 @@ struct MainTaskView: View {
                 HStack {
                     Spacer()
                     NavigationLink(destination: AddTaskView(tasks: $tasks)) {
-                        Image(systemName: "plus")
-                            .font(.title.bold())
-                            .foregroundColor(.white)
-                            .frame(width: 60, height: 60)
-                            .background(Color(red: 0.1, green: 0.1, blue: 0.2))
-                            .clipShape(Circle())
-                            .shadow(radius: 5)
+                        plusButton
                     }
                     Spacer()
                 }
-                .padding(.bottom, 20)
+                .padding(.bottom, 10)
             }
         }
         .navigationBarHidden(true)
     }
     
+    // --- კომპონენტები ---
+    
     var headerSection: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 4) {
             HStack {
-                Text("TODO TASK")
-                    .font(.headline)
+                Text("MY DAILY TASKS")
+                    .font(.system(size: 14, weight: .black))
+                    .kerning(2)
                 Spacer()
-                Image(systemName: "calendar")
-                    .overlay(Text("15").font(.system(size: 8)).offset(y: 2))
+                // გასწორებული კალენდარი
+                ZStack {
+                    Image(systemName: "calendar")
+                        .font(.system(size: 28))
+                    Text("\(Calendar.current.component(.day, from: Date()))")
+                        .font(.system(size: 10, weight: .bold))
+                        .offset(y: 3)
+                }
             }
-            .foregroundColor(.white)
+            .foregroundColor(.white.opacity(0.8))
             .padding(.horizontal)
             .padding(.top, 20)
             
-            Text("25.2.2024")
-                .font(.system(size: 32, weight: .bold))
+            Text(currentDateString)
+                .font(.system(size: 34, weight: .heavy))
                 .foregroundColor(.white)
                 .padding(.leading)
             
-            HStack {
-                Spacer()
-                Text("9:41")
-                    .font(.system(size: 32, weight: .bold))
-                    .foregroundColor(.white)
-                    .padding(.trailing)
+            TimelineView(.periodic(from: .now, by: 1.0)) { context in
+                Text(context.date, style: .time)
+                    .font(.system(size: 20, weight: .light))
+                    .foregroundColor(.white.opacity(0.7))
+                    .padding(.leading)
             }
         }
+    }
+    
+    var statisticsCard: some View {
+        let completedCount = tasks.filter { $0.isCompleted }.count
+        let totalCount = tasks.count
+        let progress = totalCount > 0 ? Double(completedCount) / Double(totalCount) : 0
+        
+        return HStack {
+            VStack(alignment: .leading, spacing: 10) {
+                Text("Progress Status")
+                    .font(.headline)
+                    .foregroundColor(.white)
+                
+                HStack(spacing: 20) {
+                    VStack(alignment: .leading) {
+                        statRow(title: "Completed", count: completedCount, color: .green)
+                        statRow(title: "Incomplete", count: totalCount - completedCount, color: .orange)
+                    }
+                    
+                    Spacer()
+                    
+                    // პროცენტულობის წრე
+                    ZStack {
+                        Circle()
+                            .stroke(Color.white.opacity(0.1), lineWidth: 8)
+                        Circle()
+                            .trim(from: 0, to: progress)
+                            .stroke(
+                                LinearGradient(colors: [.cyan, .blue], startPoint: .top, endPoint: .bottom),
+                                style: StrokeStyle(lineWidth: 8, lineCap: .round)
+                            )
+                            .rotationEffect(.degrees(-90))
+                        
+                        Text("\(Int(progress * 100))%")
+                            .font(.system(size: 14, weight: .bold))
+                            .foregroundColor(.white)
+                    }
+                    .frame(width: 60, height: 60)
+                }
+            }
+            .padding(20)
+            .background(RoundedRectangle(cornerRadius: 20).fill(Color.white.opacity(0.12)))
+            .overlay(RoundedRectangle(cornerRadius: 20).stroke(Color.white.opacity(0.1), lineWidth: 1))
+            .padding(.horizontal)
+        }
+    }
+    
+    func taskRow(task: Binding<ToDoItem>) -> some View {
+        HStack {
+            VStack(alignment: .leading, spacing: 4) {
+                Text(task.wrappedValue.title)
+                    .font(.system(size: 16, weight: .medium))
+                    .foregroundColor(task.wrappedValue.isCompleted ? .gray : .primary)
+                    .strikethrough(task.wrappedValue.isCompleted)
+            }
+            Spacer()
+            Button(action: { withAnimation { task.wrappedValue.isCompleted.toggle() } }) {
+                Image(systemName: task.wrappedValue.isCompleted ? "checkmark.circle.fill" : "circle")
+                    .font(.title2)
+                    .foregroundColor(task.wrappedValue.isCompleted ? .green : .gray)
+            }
+        }
+        .padding()
+        .background(RoundedRectangle(cornerRadius: 15).fill(Color.white))
+        .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 2)
+    }
+    
+    func filterButton(title: String, icon: String, color: Color, active: Bool) -> some View {
+        VStack {
+            Image(systemName: icon)
+                .font(.system(size: 20))
+            Text(title).font(.caption2).fontWeight(.bold)
+        }
+        .foregroundColor(active ? .white : .gray)
+    }
+
+    func statRow(title: String, count: Int, color: Color) -> some View {
+        HStack {
+            Circle().fill(color).frame(width: 8, height: 8)
+            Text("\(title):")
+                .font(.caption)
+                .foregroundColor(.white.opacity(0.7))
+            Text("\(count)")
+                .font(.caption.bold())
+                .foregroundColor(.white)
+        }
+    }
+    
+    var plusButton: some View {
+        Image(systemName: "plus")
+            .font(.title.bold())
+            .foregroundColor(.white)
+            .frame(width: 65, height: 65)
+            .background(
+                LinearGradient(colors: [Color(red: 0.2, green: 0.3, blue: 0.9), .blue], startPoint: .topLeading, endPoint: .bottomTrailing)
+            )
+            .clipShape(Circle())
+            .shadow(color: .blue.opacity(0.4), radius: 10, y: 5)
     }
 }
 
@@ -143,14 +234,14 @@ struct AddTaskView: View {
     var body: some View {
         ZStack {
             backgroundGradient
-            
             VStack(spacing: 30) {
-                TextField("Detail", text: $text)
-                    .padding(.bottom, 5)
-                    .overlay(Rectangle().frame(height: 1).foregroundColor(.white.opacity(0.5)), alignment: .bottom)
+                TextField("What needs to be done?", text: $text)
+                    .font(.title3)
+                    .padding()
+                    .background(RoundedRectangle(cornerRadius: 15).fill(Color.white.opacity(0.1)))
                     .foregroundColor(.white)
-                    .padding(.horizontal, 40)
-                    .padding(.top, 100)
+                    .padding(.horizontal, 20)
+                    .padding(.top, 50)
                 
                 Button(action: {
                     if !text.isEmpty {
@@ -158,70 +249,70 @@ struct AddTaskView: View {
                         dismiss()
                     }
                 }) {
-                    Text("ADD")
-                        .fontWeight(.bold)
+                    Text("Create Task")
+                        .font(.headline)
                         .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
                         .padding()
-                        .background(Color(red: 0.1, green: 0.1, blue: 0.3))
-                        .cornerRadius(10)
-                        .padding(.horizontal, 40)
+                        .background(Color.blue)
+                        .cornerRadius(15)
+                        .padding(.horizontal, 20)
                 }
                 Spacer()
             }
         }
-        .navigationTitle("Add Task")
-        .preferredColorScheme(.dark)
+        .navigationTitle("New Task")
     }
 }
 
-// --- გვერდი 3: დასრულებული დავალებები ---
-struct CompletedTaskView: View {
-    var tasks: [ToDoItem]
+// --- გვერდი 3: გაფილტრული დავალებები ---
+struct FilteredTaskView: View {
+    @Binding var tasks: [ToDoItem]
+    var filterCompleted: Bool
     
     var body: some View {
         ZStack {
             backgroundGradient
-            
-            VStack {
-                ScrollView {
-                    VStack(spacing: 12) {
-                        ForEach(tasks.filter { $0.isCompleted }) { task in
-                            Text(task.title)
-                                .font(.system(size: 14))
-                                .foregroundColor(.gray)
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .padding()
-                                .background(Color.white)
-                                .cornerRadius(12)
+            ScrollView {
+                VStack(spacing: 12) {
+                    let filteredIndices = tasks.indices.filter { tasks[$0].isCompleted == filterCompleted }
+                    
+                    if filteredIndices.isEmpty {
+                        VStack(spacing: 20) {
+                            Image(systemName: filterCompleted ? "checkmark.circle" : "tray")
+                                .font(.system(size: 60))
+                            Text("No tasks found")
+                        }
+                        .foregroundColor(.white.opacity(0.5))
+                        .padding(.top, 100)
+                    } else {
+                        ForEach(filteredIndices, id: \.self) { index in
+                            HStack {
+                                Text(tasks[index].title)
+                                    .foregroundColor(.primary)
+                                Spacer()
+                                Button(action: { tasks.remove(at: index) }) {
+                                    Image(systemName: "trash.fill")
+                                        .foregroundColor(.red)
+                                }
+                            }
+                            .padding()
+                            .background(RoundedRectangle(cornerRadius: 15).fill(Color.white))
                         }
                     }
-                    .padding()
                 }
-                
-                Spacer()
-                
-                VStack {
-                    Image(systemName: "list.bullet")
-                    Text("All").font(.caption2)
-                }
-                .foregroundColor(.black)
-                .padding(.bottom, 30)
+                .padding()
             }
         }
-        .navigationTitle("Completed Task")
+        .navigationTitle(filterCompleted ? "Completed" : "Pending")
     }
 }
 
 // საერთო ფონი
 var backgroundGradient: some View {
     LinearGradient(
-        gradient: Gradient(colors: [Color.black, Color(red: 0.2, green: 0.2, blue: 0.6), Color(red: 0.5, green: 0.5, blue: 0.8)]),
+        gradient: Gradient(colors: [Color(red: 0.05, green: 0.05, blue: 0.15), Color(red: 0.1, green: 0.15, blue: 0.4)]),
         startPoint: .top,
         endPoint: .bottom
     ).ignoresSafeArea()
-}
-
-#Preview {
-    ContentView()
 }
