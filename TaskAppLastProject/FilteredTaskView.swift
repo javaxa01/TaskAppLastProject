@@ -14,7 +14,6 @@ struct FilteredTaskView: View {
             backgroundGradient
             
             VStack {
-                // თუ ვართ Pending გვერდზე, გამოვაჩინოთ დამატების პატარა პანელი
                 if !filterCompleted {
                     quickAddSection
                 }
@@ -82,7 +81,6 @@ struct FilteredTaskView: View {
         .background(Color.black.opacity(0.2))
     }
 
-    // თითოეული დავალების დიზაინი თარიღით
     func taskRowExtended(index: Int) -> some View {
         HStack {
             VStack(alignment: .leading, spacing: 5) {
@@ -110,7 +108,6 @@ struct FilteredTaskView: View {
         .background(RoundedRectangle(cornerRadius: 15).fill(Color.white))
     }
 
-    // დამატების ლოგიკა
     private func addNewTask() {
         if !newTaskTitle.isEmpty {
             let newItem = ToDoItem(title: newTaskTitle, isCompleted: false, dueDate: selectedDate)
@@ -119,7 +116,6 @@ struct FilteredTaskView: View {
         }
     }
     
-    // ცალკე Sheet ფანჯარა უფრო დეტალური დამატებისთვის
     var quickAddSheet: some View {
         VStack(spacing: 20) {
             Text("New Pending Task").font(.headline).padding()

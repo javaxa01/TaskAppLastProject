@@ -21,10 +21,12 @@ struct ContentView: View {
     }
 }
 
-// საერთო ფონი, რომელიც ყველა ფაილში გამოგვადგება
 var backgroundGradient: some View {
     LinearGradient(
-        gradient: Gradient(colors: [Color(red: 0.05, green: 0.05, blue: 0.15), Color(red: 0.1, green: 0.15, blue: 0.4)]),
+        gradient: Gradient(colors: [
+            Color(red: 0.01, green: 0.1, blue: 0.05),
+            Color(red: 0.05, green: 0.2, blue: 0.1)
+        ]),
         startPoint: .top,
         endPoint: .bottom
     ).ignoresSafeArea()

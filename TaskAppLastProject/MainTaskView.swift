@@ -17,7 +17,6 @@ struct MainTaskView: View {
             VStack(alignment: .leading) {
                 headerSection
                 
-                // ფილტრის ღილაკები
                 HStack(spacing: 30) {
                     Spacer()
                     filterIcon(title: "All", icon: "list.bullet", active: true)
@@ -33,7 +32,6 @@ struct MainTaskView: View {
 
                 statisticsCard
                 
-                // დავალებების სია
                 ScrollView {
                     VStack(spacing: 15) {
                         ForEach($tasks) { $task in
@@ -60,13 +58,11 @@ struct MainTaskView: View {
     func taskRow(task: Binding<ToDoItem>) -> some View {
         HStack {
             VStack(alignment: .leading, spacing: 5) {
-                // თასქის სათაური
                 Text(task.wrappedValue.title)
                     .font(.system(size: 16, weight: .medium))
                     .strikethrough(task.wrappedValue.isCompleted)
                     .foregroundColor(task.wrappedValue.isCompleted ? .gray : .black)
                 
-                // დედლაინის ჩვენება (მხოლოდ თუ თასქი არ არის დასრულებული)
                 HStack(spacing: 4) {
                     Image(systemName: "calendar")
                         .font(.caption2)
@@ -78,7 +74,6 @@ struct MainTaskView: View {
             
             Spacer()
             
-            // შესრულების ღილაკი
             Button(action: { withAnimation { task.wrappedValue.isCompleted.toggle() } }) {
                 Image(systemName: task.wrappedValue.isCompleted ? "checkmark.circle.fill" : "circle")
                     .font(.title2)
