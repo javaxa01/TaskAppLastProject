@@ -4,7 +4,6 @@ struct FilteredTaskView: View {
     @Binding var tasks: [ToDoItem]
     var filterCompleted: Bool
     
-    // ახალი თასქისთვის საჭირო State-ები
     @State private var newTaskTitle: String = ""
     @State private var selectedDate: Date = Date()
     @State private var isShowingAddSheet = false

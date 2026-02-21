@@ -35,7 +35,7 @@ struct MainTaskView: View {
                 ScrollView {
                     VStack(spacing: 15) {
                         ForEach($tasks) { $task in
-                            taskRow(task: $task) // ვიძახებთ განახლებულ ფუნქციას
+                            taskRow(task: $task) 
                         }
                     }
                     .padding(.horizontal)
@@ -54,7 +54,6 @@ struct MainTaskView: View {
         .navigationBarHidden(true)
     }
     
-    // --- განახლებული Task Row დედლაინით ---
     func taskRow(task: Binding<ToDoItem>) -> some View {
         HStack {
             VStack(alignment: .leading, spacing: 5) {
@@ -85,7 +84,6 @@ struct MainTaskView: View {
         .shadow(color: .black.opacity(0.05), radius: 5, x: 0, y: 2)
     }
 
-    // დანარჩენი დამხმარე კომპონენტები (headerSection, statisticsCard და ა.შ.) უცვლელია...
     var headerSection: some View {
         VStack(alignment: .leading, spacing: 4) {
             HStack {
