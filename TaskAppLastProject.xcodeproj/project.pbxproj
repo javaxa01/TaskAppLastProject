@@ -6,8 +6,23 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		2C9299F82F4CA96B00BB16DE /* AddTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9299F72F4CA96B00BB16DE /* AddTaskView.swift */; };
+		2C9299FA2F4CA98100BB16DE /* TaskAppLastProjectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9299F92F4CA98100BB16DE /* TaskAppLastProjectApp.swift */; };
+		2C9299FC2F4CA99E00BB16DE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9299FB2F4CA99E00BB16DE /* ContentView.swift */; };
+		2C9299FE2F4CA9A900BB16DE /* ToDoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9299FD2F4CA9A900BB16DE /* ToDoItem.swift */; };
+		2C929A002F4CA9B600BB16DE /* FilteredTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9299FF2F4CA9B600BB16DE /* FilteredTaskView.swift */; };
+		2C929A022F4CAA0B00BB16DE /* MainTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C929A012F4CAA0B00BB16DE /* MainTaskView.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
-		2CC987D12F4519A10069B571 /* TaskAppLastProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaskAppLastProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2C9299F72F4CA96B00BB16DE /* AddTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskView.swift; sourceTree = "<group>"; };
+		2C9299F92F4CA98100BB16DE /* TaskAppLastProjectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskAppLastProjectApp.swift; sourceTree = "<group>"; };
+		2C9299FB2F4CA99E00BB16DE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		2C9299FD2F4CA9A900BB16DE /* ToDoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoItem.swift; sourceTree = "<group>"; };
+		2C9299FF2F4CA9B600BB16DE /* FilteredTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredTaskView.swift; sourceTree = "<group>"; };
+		2C929A012F4CAA0B00BB16DE /* MainTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTaskView.swift; sourceTree = "<group>"; };
+		2C929A042F4CAAC600BB16DE /* TaskAppLastProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaskAppLastProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -45,17 +60,15 @@
 		2CC987C82F4519A10069B571 = {
 			isa = PBXGroup;
 			children = (
+				2C9299F72F4CA96B00BB16DE /* AddTaskView.swift */,
+				2C9299F92F4CA98100BB16DE /* TaskAppLastProjectApp.swift */,
+				2C9299FB2F4CA99E00BB16DE /* ContentView.swift */,
+				2C9299FD2F4CA9A900BB16DE /* ToDoItem.swift */,
+				2C929A012F4CAA0B00BB16DE /* MainTaskView.swift */,
+				2C9299FF2F4CA9B600BB16DE /* FilteredTaskView.swift */,
 				2CC987D32F4519A10069B571 /* TaskAppLastProject */,
-				2CC987D22F4519A10069B571 /* Products */,
+				2C929A042F4CAAC600BB16DE /* TaskAppLastProject.app */,
 			);
-			sourceTree = "<group>";
-		};
-		2CC987D22F4519A10069B571 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				2CC987D12F4519A10069B571 /* TaskAppLastProject.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -80,7 +93,7 @@
 			packageProductDependencies = (
 			);
 			productName = TaskAppLastProject;
-			productReference = 2CC987D12F4519A10069B571 /* TaskAppLastProject.app */;
+			productReference = 2C929A042F4CAAC600BB16DE /* TaskAppLastProject.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -95,6 +108,7 @@
 				TargetAttributes = {
 					2CC987D02F4519A10069B571 = {
 						CreatedOnToolsVersion = 26.1.1;
+						LastSwiftMigration = 2610;
 					};
 				};
 			};
@@ -108,7 +122,7 @@
 			mainGroup = 2CC987C82F4519A10069B571;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
-			productRefGroup = 2CC987D22F4519A10069B571 /* Products */;
+			productRefGroup = 2CC987C82F4519A10069B571;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -132,6 +146,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2C929A002F4CA9B600BB16DE /* FilteredTaskView.swift in Sources */,
+				2C9299F82F4CA96B00BB16DE /* AddTaskView.swift in Sources */,
+				2C9299FE2F4CA9A900BB16DE /* ToDoItem.swift in Sources */,
+				2C929A022F4CAA0B00BB16DE /* MainTaskView.swift in Sources */,
+				2C9299FC2F4CA99E00BB16DE /* ContentView.swift in Sources */,
+				2C9299FA2F4CA98100BB16DE /* TaskAppLastProjectApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,6 +163,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -171,6 +192,8 @@
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -182,6 +205,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -210,6 +234,7 @@
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

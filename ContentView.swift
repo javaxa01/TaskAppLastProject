@@ -10,8 +10,8 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var tasks: [ToDoItem] = [
-        ToDoItem(title: "Explore SwiftUI Features", isCompleted: false),
-        ToDoItem(title: "Design Modern UI", isCompleted: true)
+        ToDoItem(title: "Explore SwiftUI Features", isCompleted: false, dueDate: Date()),
+        ToDoItem(title: "Design Modern UI", isCompleted: true, dueDate:     Date())
     ]
     
     var body: some View {
