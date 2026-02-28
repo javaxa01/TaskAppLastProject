@@ -6,22 +6,7 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		2C9299F82F4CA96B00BB16DE /* AddTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9299F72F4CA96B00BB16DE /* AddTaskView.swift */; };
-		2C9299FA2F4CA98100BB16DE /* TaskAppLastProjectApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9299F92F4CA98100BB16DE /* TaskAppLastProjectApp.swift */; };
-		2C9299FC2F4CA99E00BB16DE /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9299FB2F4CA99E00BB16DE /* ContentView.swift */; };
-		2C9299FE2F4CA9A900BB16DE /* ToDoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9299FD2F4CA9A900BB16DE /* ToDoItem.swift */; };
-		2C929A002F4CA9B600BB16DE /* FilteredTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C9299FF2F4CA9B600BB16DE /* FilteredTaskView.swift */; };
-		2C929A022F4CAA0B00BB16DE /* MainTaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C929A012F4CAA0B00BB16DE /* MainTaskView.swift */; };
-/* End PBXBuildFile section */
-
 /* Begin PBXFileReference section */
-		2C9299F72F4CA96B00BB16DE /* AddTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTaskView.swift; sourceTree = "<group>"; };
-		2C9299F92F4CA98100BB16DE /* TaskAppLastProjectApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskAppLastProjectApp.swift; sourceTree = "<group>"; };
-		2C9299FB2F4CA99E00BB16DE /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		2C9299FD2F4CA9A900BB16DE /* ToDoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoItem.swift; sourceTree = "<group>"; };
-		2C9299FF2F4CA9B600BB16DE /* FilteredTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilteredTaskView.swift; sourceTree = "<group>"; };
-		2C929A012F4CAA0B00BB16DE /* MainTaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTaskView.swift; sourceTree = "<group>"; };
 		2C929A042F4CAAC600BB16DE /* TaskAppLastProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TaskAppLastProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -36,6 +21,16 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
+		2C33155D2F5349F600510240 /* Info */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Info;
+			sourceTree = "<group>";
+		};
+		2C3315652F5349F600510240 /* Scenes */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Scenes;
+			sourceTree = "<group>";
+		};
 		2CC987D32F4519A10069B571 /* TaskAppLastProject */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
@@ -60,12 +55,8 @@
 		2CC987C82F4519A10069B571 = {
 			isa = PBXGroup;
 			children = (
-				2C9299F72F4CA96B00BB16DE /* AddTaskView.swift */,
-				2C9299F92F4CA98100BB16DE /* TaskAppLastProjectApp.swift */,
-				2C9299FB2F4CA99E00BB16DE /* ContentView.swift */,
-				2C9299FD2F4CA9A900BB16DE /* ToDoItem.swift */,
-				2C929A012F4CAA0B00BB16DE /* MainTaskView.swift */,
-				2C9299FF2F4CA9B600BB16DE /* FilteredTaskView.swift */,
+				2C33155D2F5349F600510240 /* Info */,
+				2C3315652F5349F600510240 /* Scenes */,
 				2CC987D32F4519A10069B571 /* TaskAppLastProject */,
 				2C929A042F4CAAC600BB16DE /* TaskAppLastProject.app */,
 			);
@@ -87,6 +78,8 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
+				2C33155D2F5349F600510240 /* Info */,
+				2C3315652F5349F600510240 /* Scenes */,
 				2CC987D32F4519A10069B571 /* TaskAppLastProject */,
 			);
 			name = TaskAppLastProject;
@@ -146,12 +139,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2C929A002F4CA9B600BB16DE /* FilteredTaskView.swift in Sources */,
-				2C9299F82F4CA96B00BB16DE /* AddTaskView.swift in Sources */,
-				2C9299FE2F4CA9A900BB16DE /* ToDoItem.swift in Sources */,
-				2C929A022F4CAA0B00BB16DE /* MainTaskView.swift in Sources */,
-				2C9299FC2F4CA99E00BB16DE /* ContentView.swift in Sources */,
-				2C9299FA2F4CA98100BB16DE /* TaskAppLastProjectApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
